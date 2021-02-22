@@ -1,3 +1,5 @@
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # device denfinition
@@ -10,7 +12,8 @@ PRODUCT_CHARACTERISTICS := tablet,nosdcard
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # overlays
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += \
+          $(LOCAL_PATH)/overlay \
 
 # /vendor/etc
 PRODUCT_COPY_FILES += \
@@ -23,7 +26,6 @@ PRODUCT_COPY_FILES += \
 # system configuration
 PRODUCT_PROPERTY_OVERRIDES += \
           ro.config.low_ram=true \
-          ro.product.serialnumber=123456789 \
           ro.hardware.hwcomposer=drm_minigbm \
           ro.hardware.gralloc=minigbm \
           ro.lmk.low=1001 \
@@ -35,6 +37,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
           ro.hardware.egl=swiftshader \
           ro.lmk.debug=true \
           persist.sys.strictmode.visual=0 \
-          persist.sys.strictmode.disable=1 \
-          ro.lmk.debug=true
+          persist.sys.strictmode.disable=1
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
