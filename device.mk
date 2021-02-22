@@ -3,9 +3,6 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 
-# Api
-PRODUCT_SHIPPING_API_LEVEL := 30
-
 # ART only
 PRODUCT_RUNTIMES := runtime_libart_default
 
@@ -30,7 +27,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES := \
 	frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
 	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration.xml \
@@ -70,7 +66,10 @@ PRODUCT_PACKAGES += \
 
 # gatekeeper
 PRODUCT_PACKAGES += \
-        android.hardware.gatekeeper@1.0-service.software
+        android.hardware.gatekeeper@1.0-service \
+	android.hardware.gatekeeper@1.0-impl \
+	gatekeeper \
+	gatekeeperd \
 
 # memtrack
 PRODUCT_PACKAGES += \
@@ -91,7 +90,6 @@ PRODUCT_COPY_FILES := \
 
 # Generic Android
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/ueventd.common.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
        	frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
     	frameworks/native/data/etc/android.software.backup.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.backup.xml \
     	frameworks/native/data/etc/android.software.voice_recognizers.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.voice_recognizers.xml \
@@ -101,4 +99,4 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	android.hardware.configstore@1.1-service \
-    	vndservicemanager \
+#    	vndservicemanager \
